@@ -20,24 +20,27 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
-    {
-        isMoving = (movement != 0);
-        animator.SetBool("Run", isMoving);
-    }
-
     void FixedUpdate()
     {
+        // check whether the player is moving and update the animator
+        isMoving = (movement != 0);
+        animator.SetBool("Run", isMoving);
+
+        // move the player
         rb.linearVelocity = new Vector2(movement * moveSpeed, rb.linearVelocity.y);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        // if the player is on the ground, set the isGrounded boolean
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
         }
     }
+
+
+    // player movement functions 
 
     void OnMove(InputValue value) {
         movement = value.Get<float>();
