@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     private float movement = 0;
-    private bool isMoving = false;
     private bool isGrounded;
 
     private Animator animator;
@@ -22,9 +21,8 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        // check whether the player is moving and update the animator
-        isMoving = (movement != 0);
-        animator.SetBool("Run", isMoving);
+        // update the animator depending on whether the player is moving
+        animator.SetBool("Run", movement != 0);
 
         // move the player
         rb.linearVelocity = new Vector2(movement * moveSpeed, rb.linearVelocity.y);

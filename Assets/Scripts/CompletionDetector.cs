@@ -22,7 +22,7 @@ public class CompletionDetector : MonoBehaviour
                     GameState.currentLevel = 3;
                     GameState.playerWon = true;
 
-                    SceneManager.LoadScene("StartMenu");
+                    SceneManager.LoadScene("Menu");
 
                     break;
 
@@ -31,8 +31,8 @@ public class CompletionDetector : MonoBehaviour
                     GameState.currentLevel = 0;
                     GameState.playerWon = false;
 
-                    Debug.Log("Wrong gamestate, this shouldn't happen");
-                    SceneManager.LoadScene("StartMenu");
+                    Debug.Log("Couldn't load the next scene, wrong game state");
+                    SceneManager.LoadScene("Menu");
 
                     break;
             }

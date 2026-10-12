@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Completion-Detector
+  - Enemy
+  - Broom
   layers:
   - Default
   - TransparentFX
