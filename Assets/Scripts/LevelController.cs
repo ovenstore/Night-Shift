@@ -39,20 +39,34 @@ public class LevelController : MonoBehaviour
     {
         spawnTimer += 1;
 
-        // if the timer is greater than the interval and we haven't exceeded the max number of enemies then spawn an enemy and reset timer
-        if (spawnTimer >= spawnInterval && GameObject.FindGameObjectsWithTag("Enemy").Length < maxEnemies)
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        // check that the timer is greater than the spawn interval and that we haven't exceeded the max number of enemies
+        if (spawnTimer >= spawnInterval && enemies.Length < maxEnemies)
         {
-            SpawnEnemy();
+            // get the x value 2 units right of the camera right edge
+            float spawnX = 2 + cam.ViewportToWorldPoint(new Vector3(1, 0, 0)).x;
+
+            // ensure that we aren't spawning on top of any previous enemies
+            foreach (GameObject enemy in enemies) {
+                if (Mathf.Abs(spawnX - enemy.transform.position.x) < 2)
+                {
+                    spawnX += 2;
+                }
+            }
+
+            // check that spawnX is still within the level bounds 
+            if (spawnX < 52)
+            {
+                SpawnEnemy(spawnX);
+            }
 
             spawnTimer = 0;
         }
     }
 
-    void SpawnEnemy()
+    void SpawnEnemy(float spawnX)
     {
-        // update spawnX to be the x value 2 units right of the camera right edge
-        float spawnX = 2 + cam.ViewportToWorldPoint(new Vector3(1, 0, 0)).x;
-
         // randomly spawn either a bat or a snake
         if (Random.value > 0.5f)
         {

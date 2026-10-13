@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15082a089a2b5d5d7bf4c14c90e0b5dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelController
-  difficulty1: 1
-  difficulty2: 2
+  difficulty1: 2
+  difficulty2: 5
   maxEnemies1: 6
   maxEnemies2: 10
   bat: {fileID: 7337970014224291494, guid: ca47c056072f5d0d6819a969be0e4082, type: 3}
