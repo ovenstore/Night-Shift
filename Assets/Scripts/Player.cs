@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -40,6 +41,13 @@ public class Player : MonoBehaviour
 
         // move the player
         rb.linearVelocity = new Vector2(movement * moveSpeed, rb.linearVelocity.y);
+
+        // if the player's health goes to zero, end the game
+        if (currentHealth <= 0)
+        {
+            GameState.currentLevel = 3;
+            SceneManager.LoadScene("Menu");
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
