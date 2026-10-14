@@ -8,6 +8,8 @@ TagManager:
   - Completion-Detector
   - Enemy
   - Broom
+  - Snake
+  - Bat
   layers:
   - Default
   - TransparentFX

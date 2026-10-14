@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -11,12 +12,25 @@ public class Player : MonoBehaviour
 
     public int moveSpeed;
     public int jumpVelocity;
-
+    public Collider2D broomCollider;
+    public Slider healthBar;
+    public bool highAttacking = false;
+    public bool lowAttacking = false;
+    public float health;
+    private float currentHealth;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+
+        // disable the broom collider so that it is only enabled when attacking
+        broomCollider.enabled = false;
+
+        // set up the health bar
+        healthBar.maxValue = health;
+        healthBar.value = health;
+        currentHealth = health;
     }
 
     void FixedUpdate()
@@ -34,6 +48,16 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+        }
+    }
+
+    // take damage if in contact wiht an enemy
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            currentHealth -= 0.1f;
+            healthBar.value = currentHealth;
         }
     }
 
@@ -57,9 +81,21 @@ public class Player : MonoBehaviour
     void OnHighAttack()
     {
         animator.SetTrigger("High Attack");
+        broomCollider.enabled = true;
+        highAttacking = true;
     }
 
     void OnLowAttack() {
         animator.SetTrigger("Low Attack");
+        broomCollider.enabled = true;
+        lowAttacking = true;
+    }
+
+    // called from the animator at the end of the attacking animations
+    void StopAttack()
+    {
+        broomCollider.enabled = false;
+        highAttacking = false;
+        lowAttacking = false;
     }
 }

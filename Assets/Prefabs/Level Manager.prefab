@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelController
   difficulty1: 2
-  difficulty2: 5
+  difficulty2: 4
   maxEnemies1: 6
-  maxEnemies2: 10
+  maxEnemies2: 6
   bat: {fileID: 7337970014224291494, guid: ca47c056072f5d0d6819a969be0e4082, type: 3}
   snake: {fileID: 5670381636056418793, guid: a5681c5327e7e1ca5b03fb18ba4d1579, type: 3}
